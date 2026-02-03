@@ -1,3 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using automatic_clean_folder;
+String filePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads";
+var mapper = new FileMapper(filePath);
+var fileFromDownload = mapper.GetFiles();
 
-Console.WriteLine("Hello, World!");
+
+var fileCleaner = new FileCleaner(fileFromDownload);
+fileCleaner.ExcludeFiles();
+
