@@ -18,10 +18,16 @@ public class FileCleaner
         _logger.LogInformation("Trying to exclude files");
         foreach (var file in Files)
         {
-            if (file.LastWriteTime < DateTime.Now.AddDays(-30))
-            {
-                Console.WriteLine($"{file.Name} {file.LastWriteTimeUtc.ToShortDateString()} [apagado]");
-            }
+                if (file.LastWriteTime < DateTime.Now.AddDays(-30))
+                {
+                    try
+                    {
+                        _logger.LogInformation($"Deleting {file.Name}");
+                    }catch(Exception e)
+                    {
+                        _logger.LogError(e.Message);
+                    }
+                }
         }
     }
 }
