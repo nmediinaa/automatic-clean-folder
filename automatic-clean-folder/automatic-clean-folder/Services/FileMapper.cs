@@ -4,7 +4,6 @@ namespace automatic_clean_folder;
 
 public class FileMapper
 {
-    private readonly ILogger<FileMapper> _logger;
     public List<FileInfo> Files { get; set; }
     public string Path { get; set; }
 
@@ -16,7 +15,10 @@ public class FileMapper
 
     public void GetFiles()
     {
-        //_logger.LogInformation($"Getting files from {Path}");
+        using var factory = LoggerFactory.Create(builder => builder.AddConsole());
+        var loggerMapper = factory.CreateLogger<FileMapper>();
+        loggerMapper.LogInformation($"Getting files from {Path}");
+        Thread.Sleep(1000);
         
         DirectoryInfo directoryInfo = new DirectoryInfo(Path);
         Files = directoryInfo.GetFiles("*.*").ToList();

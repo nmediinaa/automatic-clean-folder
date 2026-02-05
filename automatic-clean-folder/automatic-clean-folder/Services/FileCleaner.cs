@@ -14,21 +14,21 @@ public class FileCleaner
 
     public void ExcludeFiles()
     {
-        //_logger.LogInformation("Trying to exclude files");
+        using var factory = LoggerFactory.Create(builder => builder.AddConsole());
+        var loggerCleaner = factory.CreateLogger<FileCleaner>();
+        loggerCleaner.LogInformation("Trying to exclude files");
+        
         foreach (var file in Files)
         {
                 if (file.LastWriteTime < DateTime.Now.AddDays(-30))
                 {
                     try
                     {
-                        //_logger.LogInformation($"Deleting {file.Name}");
-                        Console.WriteLine($"Deleting {file.Name}");
+                        loggerCleaner.LogInformation($"Deleting {file.Name}");
                         Thread.Sleep(500);
-                        Console.Clear();
                     }catch(Exception e)
                     {
-                        //_logger.LogError(e.Message);
-                        Console.WriteLine(e.Message);
+                        loggerCleaner.LogError(e.Message);
                     }
                 }
         }

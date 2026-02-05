@@ -4,8 +4,6 @@ using Microsoft.Extensions.Logging;
 
 using var factory = LoggerFactory.Create(builder => builder.AddConsole());
 var logger = factory.CreateLogger<Program>();
-var loggerMapper = factory.CreateLogger<FileMapper>();
-var loggerCleaner = factory.CreateLogger<FileCleaner>();
 
 logger.LogInformation("Program has started");
 Thread.Sleep(1000);
