@@ -12,7 +12,7 @@ public class FileCleaner
         this.Files = files;
     }
 
-    public int ExcludeFiles()
+    public int DeleteOldFiles()
     {
         int totalFiles = 0;
         using var factory = LoggerFactory.Create(builder => builder.AddConsole());

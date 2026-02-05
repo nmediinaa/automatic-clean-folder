@@ -43,7 +43,7 @@ public class Menu
         string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + $"\\{folderName}";
         
         var fileMapper = new FileMapper(path);        
-        int totalFiles = fileMapper.GetFiles();
+        int totalFiles = fileMapper.LoadAndClean();
 
         Console.WriteLine($"Total files deleted: {totalFiles}");
     }
