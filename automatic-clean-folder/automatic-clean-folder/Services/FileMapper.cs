@@ -9,19 +9,20 @@ public class FileMapper
     public string Path { get; set; }
 
 
-    public FileMapper(string path,  ILogger<FileMapper> logger)
+    public FileMapper(string path)
     {
         this.Path = path;
-        this._logger = logger;
     }
 
-    public List<FileInfo> GetFiles()
+    public void GetFiles()
     {
-        _logger.LogInformation($"Getting files from {Path}");
+        //_logger.LogInformation($"Getting files from {Path}");
         
         DirectoryInfo directoryInfo = new DirectoryInfo(Path);
         Files = directoryInfo.GetFiles("*.*").ToList();
         
-        return Files;
+        var fileCleaner = new FileCleaner(Files);
+        fileCleaner.ExcludeFiles();
+        
     }
 }

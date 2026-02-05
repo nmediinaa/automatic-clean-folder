@@ -1,4 +1,5 @@
-﻿using automatic_clean_folder;
+﻿using System.Reflection.Metadata;
+using automatic_clean_folder;
 using Microsoft.Extensions.Logging;
 
 using var factory = LoggerFactory.Create(builder => builder.AddConsole());
@@ -7,12 +8,9 @@ var loggerMapper = factory.CreateLogger<FileMapper>();
 var loggerCleaner = factory.CreateLogger<FileCleaner>();
 
 logger.LogInformation("Program has started");
+Thread.Sleep(1000);
 
-String filePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads";
-var mapper = new FileMapper(filePath, loggerMapper);
-var fileFromDownload = mapper.GetFiles();
+Menu menu = new Menu();
+menu.Exibir();
 
-
-var fileCleaner = new FileCleaner(fileFromDownload, loggerCleaner);
-fileCleaner.ExcludeFiles();
 
