@@ -13,7 +13,7 @@ public class FileMapper
         this.Path = path;
     }
 
-    public void GetFiles()
+    public int GetFiles()
     {
         using var factory = LoggerFactory.Create(builder => builder.AddConsole());
         var loggerMapper = factory.CreateLogger<FileMapper>();
@@ -24,7 +24,6 @@ public class FileMapper
         Files = directoryInfo.GetFiles("*.*").ToList();
         
         var fileCleaner = new FileCleaner(Files);
-        fileCleaner.ExcludeFiles();
-        
+        return fileCleaner.ExcludeFiles();
     }
 }

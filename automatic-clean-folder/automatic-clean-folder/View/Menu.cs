@@ -6,6 +6,7 @@ public class Menu
 
     public void Exibir()
     {
+        string input;
         int cmd;
         Console.WriteLine(_title);
         Console.WriteLine("=".PadLeft(_title.Length, '='));
@@ -13,7 +14,10 @@ public class Menu
         Console.WriteLine("[2] Exit Program");
         Console.WriteLine("");
         Console.Write(">> ");
-        cmd = Convert.ToInt32(Console.ReadLine()!);
+        input = Console.ReadLine()!;
+        
+        if (!int.TryParse(input, out cmd)) cmd = 0;
+        
         switch (cmd)
         {
             case 1:
@@ -39,6 +43,8 @@ public class Menu
         string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + $"\\{folderName}";
         
         var fileMapper = new FileMapper(path);        
-        fileMapper.GetFiles();
+        int totalFiles = fileMapper.GetFiles();
+
+        Console.WriteLine($"Total files deleted: {totalFiles}");
     }
 }

@@ -9,6 +9,8 @@ logger.LogInformation("Program has started");
 Thread.Sleep(1000);
 
 Menu menu = new Menu();
-menu.Exibir();
-
+while (true)
+{
+    menu.Exibir();    
+}
 

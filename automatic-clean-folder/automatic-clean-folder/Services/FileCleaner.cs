@@ -12,8 +12,9 @@ public class FileCleaner
         this.Files = files;
     }
 
-    public void ExcludeFiles()
+    public int ExcludeFiles()
     {
+        int totalFiles = 0;
         using var factory = LoggerFactory.Create(builder => builder.AddConsole());
         var loggerCleaner = factory.CreateLogger<FileCleaner>();
         loggerCleaner.LogInformation("Trying to exclude files");
@@ -26,11 +27,14 @@ public class FileCleaner
                     {
                         loggerCleaner.LogInformation($"Deleting {file.Name}");
                         Thread.Sleep(500);
+                        totalFiles += 1;
                     }catch(Exception e)
                     {
                         loggerCleaner.LogError(e.Message);
                     }
                 }
         }
+        
+        return  totalFiles;
     }
 }
