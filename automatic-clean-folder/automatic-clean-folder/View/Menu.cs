@@ -46,5 +46,7 @@ public class Menu
         int totalFiles = fileMapper.LoadAndClean();
 
         Console.WriteLine($"Total files deleted: {totalFiles}");
+        Thread.Sleep(5000);
+        Console.Clear();
     }
 }

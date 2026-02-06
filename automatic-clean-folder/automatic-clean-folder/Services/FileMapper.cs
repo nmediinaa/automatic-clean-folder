@@ -21,9 +21,17 @@ public class FileMapper
         Thread.Sleep(1000);
         
         DirectoryInfo directoryInfo = new DirectoryInfo(Path);
-        Files = directoryInfo.GetFiles("*.*").ToList();
+        if (!directoryInfo.Exists)
+        {
+            loggerMapper.LogInformation($"Directory {directoryInfo.FullName} does not exist");
+        }
+        else
+        {
+            Files = directoryInfo.GetFiles("*.*").ToList();
+            var fileCleaner = new FileCleaner(Files);
+            return fileCleaner.DeleteOldFiles();
+        }
         
-        var fileCleaner = new FileCleaner(Files);
-        return fileCleaner.DeleteOldFiles();
+        return 0;
     }
 }
