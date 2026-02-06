@@ -2,7 +2,7 @@
 
 public class Menu
 {
-    private string _title = "Automatic clean folder";
+    private string _title = "AUTOMATIC CLEAN FOLDER";
 
     public void Exibir()
     {
@@ -10,9 +10,10 @@ public class Menu
         int cmd;
         Console.WriteLine(_title);
         Console.WriteLine("=".PadLeft(_title.Length, '='));
-        Console.WriteLine("[1] Clean Folder");
-        Console.WriteLine("[2] Exit Program");
-        Console.WriteLine("");
+        Console.WriteLine("[1] Clean Folder".PadLeft(18));
+        Console.WriteLine("[2] Exit Program".PadLeft(18));
+        Console.WriteLine("[3] Get log path".PadLeft(18));
+        Console.WriteLine("=".PadLeft(_title.Length, '='));
         Console.Write(">> ");
         input = Console.ReadLine()!;
         
