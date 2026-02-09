@@ -8,13 +8,19 @@
  */
 public static class LogWriter
 {
-   private static readonly string _path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + 
-                           @$"\temporaria\logs{DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")}.txt";
-   
-    public static void Write(string logMessage)
+   private static string _pathLocalAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+   private static string _pathApp = Path.Combine(_pathLocalAppData, "CleanFolderApp", "logs");
+   private static readonly string _path = Path.Combine(_pathLocalAppData, "CleanFolderApp", "logs",$"logs{DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")}.txt");
+   public static void Write(string logMessage)
     {
+        if (!Directory.Exists(_pathApp))
+        {
+            Directory.CreateDirectory(_pathApp);
+        }
+        
         using var stream = new FileStream(_path, FileMode.Append);
         using var writer = new  StreamWriter(stream);
+       
         
         writer.WriteLine($"{logMessage} | {DateTime.Now}");
         writer.Close();
@@ -22,7 +28,6 @@ public static class LogWriter
 
     public static string GetLogPath()
     {
-        return Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + 
-                @$"\temporaria";
+        return _pathApp;
     }
 }
