@@ -26,6 +26,7 @@ public class FileCleaner
                     try
                     {
                         loggerCleaner.LogInformation($"Deleting {file.Name}");
+                        LogWriter.Write("[INFO]Deleting " + file.Name);
                         Thread.Sleep(500);
                         totalFiles += 1;
                     }catch(Exception e)
