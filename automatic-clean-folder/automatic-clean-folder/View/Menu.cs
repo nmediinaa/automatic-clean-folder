@@ -25,7 +25,11 @@ public class Menu
                 CleanFolderMenu();
                 break;
             case 2:
+                LogWriter.Write("[INFO] The program has finished");
                 Environment.Exit(0);
+                break;
+            case 3:
+                Console.WriteLine(LogWriter.GetLogPath());
                 break;
             default:
                 Console.WriteLine("Please enter a valid option!");
@@ -47,6 +51,7 @@ public class Menu
         int totalFiles = fileMapper.LoadAndClean();
 
         Console.WriteLine($"Total files deleted: {totalFiles}");
+        LogWriter.Write("[INFO] Total files deleted: " + totalFiles);
         Thread.Sleep(5000);
         Console.Clear();
     }

@@ -18,12 +18,14 @@ public class FileMapper
         using var factory = LoggerFactory.Create(builder => builder.AddConsole());
         var loggerMapper = factory.CreateLogger<FileMapper>();
         loggerMapper.LogInformation($"Getting files from {Path}");
+        LogWriter.Write("[INFO] Loading files");
         Thread.Sleep(1000);
         
         DirectoryInfo directoryInfo = new DirectoryInfo(Path);
         if (!directoryInfo.Exists)
         {
             loggerMapper.LogInformation($"Directory {directoryInfo.FullName} does not exist");
+            LogWriter.Write("[INFO] Directory does not exist");
         }
         else
         {
